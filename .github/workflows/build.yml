@@ -1,0 +1,28 @@
+name: Build
+
+on: [ push, workflow_dispatch ]
+
+jobs:
+  examples:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest ]
+        tf-version: [ 1.1.9, 1.2.9, 1.3.2 ]
+    steps:
+      - name: Install terraform v${{ matrix.tf-version }}
+        run: |
+          curl -LO https://releases.hashicorp.com/terraform/${{ matrix.tf-version }}/terraform_${{ matrix.tf-version }}_linux_amd64.zip
+          unzip terraform_${{ matrix.tf-version }}_linux_amd64.zip
+          sudo mv terraform /usr/local/bin
+          rm *
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Validate examples terraform v${{ matrix.tf-version }}
+        run: make examples
+  build:
+    needs: [examples]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "OK"
