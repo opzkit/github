@@ -7,7 +7,7 @@ updates:
     open-pull-requests-limit: 10
 
   - package-ecosystem: terraform
-    directory: "/"
+    directory: "/examples"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10

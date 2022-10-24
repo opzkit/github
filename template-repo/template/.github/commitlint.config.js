@@ -1,0 +1,1 @@
+../../../.github/commitlint.config.js

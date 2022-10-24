@@ -2,7 +2,7 @@ terraform {
   required_providers {
     github = {
       source  = "integrations/github"
-      version = "~> 4.0"
+      version = "~> 5.5.0"
     }
   }
 }
@@ -61,10 +61,10 @@ resource "github_repository_file" "examples" {
 }
 
 resource "github_repository_file" "github" {
-  for_each       = fileset(path.root, ".github/**/")
+  for_each       = fileset("${path.module}/template", "/.github/**/")
   repository     = github_repository.repo.name
   branch         = "main"
   file           = each.key
-  content        = file("${path.root}/${each.key}")
+  content        = file("${path.module}/template/${each.key}")
   commit_message = "chore: update ${each.key}"
 }
