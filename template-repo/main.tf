@@ -50,6 +50,8 @@ resource "github_repository_file" "files" {
   file           = each.key
   content        = file("${path.module}/template/${each.key}")
   commit_message = "chore: update ${each.key}"
+  commit_author  = "CI"
+  commit_email   = "ci@opzkit.io"
 }
 
 resource "github_repository_file" "examples" {
@@ -58,6 +60,8 @@ resource "github_repository_file" "examples" {
   file           = "examples/.gitkeep"
   content        = ""
   commit_message = "chore: update examples"
+  commit_author  = "CI"
+  commit_email   = "ci@opzkit.io"
 }
 
 resource "github_repository_file" "github" {
@@ -67,4 +71,6 @@ resource "github_repository_file" "github" {
   file           = each.key
   content        = file("${path.module}/template/${each.key}")
   commit_message = "chore: update ${each.key}"
+  commit_author  = "CI"
+  commit_email   = "ci@opzkit.io"
 }
