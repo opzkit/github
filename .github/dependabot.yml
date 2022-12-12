@@ -6,12 +6,6 @@ updates:
       interval: "daily"
     open-pull-requests-limit: 10
 
-  - package-ecosystem: terraform
-    directory: "/"
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 10
-
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -19,7 +13,7 @@ updates:
     open-pull-requests-limit: 10
 
   - package-ecosystem: "github-actions"
-    directory: "/template-repo/template"
+    directory: "/template-repo/template/.github/workflows"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10
