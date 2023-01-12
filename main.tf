@@ -20,6 +20,7 @@ module "example" {
 
   description         = "some text"
   name                = "example"
+  template            = true
   template_owner      = var.github_owner
   template_repository = module.template.template_repo
 }
