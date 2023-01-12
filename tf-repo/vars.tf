@@ -19,6 +19,12 @@ variable "license" {
   default     = "mit"
 }
 
+variable "template" {
+  type        = bool
+  description = "Set template repository"
+  default     = false
+}
+
 variable "template_owner" {
   type        = string
   description = "Github owner of template repo, for example opzkit"

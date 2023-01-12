@@ -19,11 +19,28 @@ resource "github_repository" "repo" {
   allow_rebase_merge     = false
   license_template       = var.license
   vulnerability_alerts   = true
-  #  template {
-  #    owner      = var.template_owner
-  #    repository = var.template_repository
-  #  }
+  dynamic "template" {
+    for_each = var.template ? [1] : []
+    content {
+      owner      = var.template_owner
+      repository = var.template_repository
+    }
+  }
   #allow_update_branch     = true
+
+  security_and_analysis {
+    advanced_security {
+      status = "enabled"
+    }
+
+    secret_scanning {
+      status = "disabled"
+    }
+
+    secret_scanning_push_protection {
+      status = "disabled"
+    }
+  }
 }
 
 resource "github_branch_protection" "repo" {

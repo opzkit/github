@@ -21,6 +21,20 @@ resource "github_repository" "repo" {
   vulnerability_alerts   = true
   is_template            = true
   #allow_update_branch     = true
+
+  security_and_analysis {
+    advanced_security {
+      status = "enabled"
+    }
+
+    secret_scanning {
+      status = "disabled"
+    }
+
+    secret_scanning_push_protection {
+      status = "disabled"
+    }
+  }
 }
 
 resource "github_branch_protection" "repo" {
