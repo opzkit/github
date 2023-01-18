@@ -1,12 +1,31 @@
-
-
-
+# Re-apply template repository
+Add template repository as remote:
+```shell
+git remote add template git@github.com:opzkit/tf-template.git;
+```
+Or for all:
+````shell
 for f in terraform-aws*; do
-  cd $f && git remote add template git@github.com:opzkit/tf-template.git && git fetch --all && cd ..
+  cd $f && git remote add template git@github.com:opzkit/tf-template.git; git fetch --all && cd ..
 done
+````
+The above only needs to be done once.
 
-gbc template
-git cherry-pick --no-commit --allow-empty 1c8badd7f7a4ffa2b80d26d84c5932ac52f184d0...807c49a8ae12ee7be4a0401877d4ac7f86145a84
+## Applying new template changes
 
-gcm "chore: rebase from template" && git cherry-pick --continue; gp
-...repeat
+````shell
+git checkout main
+git fetch --all
+git create branch updates_from_template
+git merge template/main --allow-unrelated-histories
+````
+
+Fix potential merge conflicts and then continue
+````shell
+git merge --continue
+````
+
+When finished, push the branch and create a PR. Choose to Squash & Merge the PR
+````shell
+git push --set-upstream origin updates_from_template
+````
