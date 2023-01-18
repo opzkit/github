@@ -23,8 +23,11 @@ resource "github_repository" "repo" {
   #allow_update_branch     = true
 
   security_and_analysis {
-    advanced_security {
-      status = "enabled"
+    dynamic "advanced_security" {
+      for_each = var.visibility == "public" ? [] : [1]
+      content {
+        status = "enabled"
+      }
     }
 
     secret_scanning {
