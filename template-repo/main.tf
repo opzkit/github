@@ -82,12 +82,13 @@ resource "github_repository_file" "examples" {
 }
 
 resource "github_repository_file" "github" {
-  for_each       = fileset("${path.module}/template", "/.github/**/")
-  repository     = github_repository.repo.name
-  branch         = "main"
-  file           = each.key
-  content        = file("${path.module}/template/${each.key}")
-  commit_message = "chore: update ${each.key}"
-  commit_author  = "CI"
-  commit_email   = "ci@opzkit.io"
+  for_each            = fileset("${path.module}/template", "/.github/**/")
+  repository          = github_repository.repo.name
+  branch              = "main"
+  file                = each.key
+  content             = file("${path.module}/template/${each.key}")
+  overwrite_on_create = true
+  commit_message      = "chore: update ${each.key}"
+  commit_author       = "CI"
+  commit_email        = "ci@opzkit.io"
 }
